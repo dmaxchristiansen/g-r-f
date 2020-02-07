@@ -1,0 +1,28 @@
+.logged-out-message{
+    color: red;
+}
+.carou{
+    width: 700px;
+}
+.messages{
+    color: red;
+    text-align: center;
+    background-color: bisque;
+}
+.carousel-item {
+    height: 400px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+}
+
+body{
+    background: url('../images/background-photo.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'social_app/css/style.css' %}">
+    <title>CURRENT PROJECTS</title>  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'log_reg_app/images/globe-icon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+            GRF
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quick Links
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/projects">Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/new_project">Create a New Project</a>
+                    </div>
+                </li>
+            </ul>
+            <a class="navbar-brand" href="/profile/{{user.id}}">
+                <img src="{{user.url}}" width="30" height="30" class="rounded-circle d-inline-block align-top" alt="">
+                {{user.first_name}} {{user.last_name}}
+            </a>
+            <a class="btn btn-primary" href="/logout">Logout</a>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <h1 class="font-weight-bold">Current Projects</h1>
+        {% if user.level == "DONOR" %}
+        <h2 class="text-danger">Please consider the following for donation</h2>
+        <h4 class="font-italic">Donations are made as "pledges" only. It will be your responsiblity as a donor to contact the project creator and secure means of funds transfer independent of this site</h4>
+        {% endif %}
+        <hr>
+        <h2 class="font-weight-bold">ENVIRONMENTAL</h2>
+        <hr>
+        {% for project in projects %}
+            {% if project.proj_type == "ENVIRONMENTAL" %}
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{project.user.url}}" class="rounded-circle" width="50" height="50" alt="">
+                <h3 class="mb-0 ml-1">{{project.user.first_name}} {{project.user.last_name}}</h3>
+            </div>
+            <a href="project/{{project.id}}"><h2 class="mb-0">{{project.name}}</h2></a>
+            <h5>{{project.location}}</h5>
+            <img src="{{project.url}}" class="rounded" width="300" alt="">
+            <h4 class="text-danger mb-0">Current Funds Pledged</h4>
+            <h4 class="text-danger">${{project.funds}}</h4>
+            <p class="text-light mb-0">{{project.desc}}</p>
+            <p class="text-light">Created on {{project.created_at}}</p>
+            <hr>
+            {% endif %}
+        {% endfor %}
+        <h2 class="font-weight-bold">HUMANITARIAN</h2>
+        <hr>
+        {% for project in projects %}
+            {% if project.proj_type == "HUMANITARIAN" %}
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{project.user.url}}" class="rounded-circle" width="50" height="50" alt="">
+                <h3 class="mb-0 ml-1">{{project.user.first_name}} {{project.user.last_name}}</h3>
+            </div>
+            <a href="project/{{project.id}}"><h3 class="mb-0">{{project.name}}</h3></a>
+            <h5>{{project.location}}</h5>
+            <img src="{{project.url}}" class="rounded" width="300" alt="">
+            <h4 class="text-danger mb-0">Current Funds Pledged</h4>
+            <h4 class="text-danger">${{project.funds}}</h4>
+            <p class="text-light mb-0">{{project.desc}}</p>
+            <p class="text-light">Created on {{project.created_at}}</p>
+            <hr>
+        {% endif %}
+        {% endfor %}
+        <h2 class="font-weight-bold">OTHER</h2>
+        <hr>
+        {% for project in projects %}
+        {% if project.proj_type == "OTHER" %}
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{project.user.url}}" class="rounded-circle" width="50" height="50" alt="">
+                <h3 class="mb-0 ml-1">{{project.user.first_name}} {{project.user.last_name}}</h3>
+            </div>
+            <a href="project/{{project.id}}"><h3 class="mb-0">{{project.name}}</h3></a>
+            <h5>{{project.location}}</h5>
+            <img src="{{project.url}}" class="rounded" width="300" alt="">
+            <h4 class="text-danger mb-0">Current Funds Pledged</h4>
+            <h4 class="text-danger">${{project.funds}}</h4>
+            <p class="text-light mb-0">{{project.desc}}</p>
+            <p class="text-light">Created on {{project.created_at}}</p>
+            <hr>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

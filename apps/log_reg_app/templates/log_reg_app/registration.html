@@ -1,0 +1,70 @@
+{% extends 'log_reg_app/home_template.html' %}
+{% block title %}
+    Registration
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="messages">
+        {% if messages %}
+        <!-- <ul class="messages">     -->
+            {% for message in messages %}    
+                <h4 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>    
+            {% endfor %}
+        <!-- </ul> -->
+        {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <h1>Create a New GRF Account</h1>
+            <form action="/register" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="first_name" class="text-light">First Name</label>
+                        <input class="form-control" type="text" name="first_name" placeholder="ex. Jane" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="last_name" class="text-light">Last Name</label>
+                        <input class="form-control" type="text" name="last_name" placeholder="ex. Doe" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="text-light">Email</label>
+                    <input class="form-control" type="text" name="email" placeholder="must be a valid email address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password" class="text-light">Password</label>
+                        <input class="form-control" type="password" name="password" placeholder="must be at least 8 characters" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirm_password" class="text-light">Confirm Password</label>
+                        <input class="form-control" type="password" name="confirm_password" placeholder="passwords must match">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="level" class="text-light">Account Type</label>
+                    <select class="form-control" id="level" name="level">
+                        <option value="USER">USER</option>
+                        <option value="DONOR">DONOR</option>
+                    </select>
+                </div>
+        </div>
+        <div class="col">
+            <h1 class="mt-1">Choose a profile picture{{user.first_name}}</h1>
+            <h4 class="text-danger">You may change your profile picture at any time on your profile page</h4>
+            <h5>Please note, pictures must be:</h5>
+            <ul>
+                <li>Less than 5MB in size</li>
+                <li>Roughly square in shape</li>
+                <li>Appropriate to be viewed by all audiences</li>
+            </ul>
+            <input type="file" class="bg-light" name="prof_pic">
+        </div>
+    </div>
+    <div class="container text-center mt-5">
+        <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+    </div>
+            </form>
+</div>
+{% endblock %}

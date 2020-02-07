@@ -1,0 +1,10 @@
+.proj-pic{
+    margin-top: 20px;
+}
+body{
+    background: url('../../../../log_reg_app/static/log_reg_app/images/background-photo.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
